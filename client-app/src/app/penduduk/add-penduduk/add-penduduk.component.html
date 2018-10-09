@@ -1,0 +1,21 @@
+<form [formGroup]="formGroup" (submit)="submited($event)">
+  <div>
+    <label for="input">Example input</label>
+    <input type="text" name="input" id="input">
+  </div>
+
+  <div formArrayName="extended">
+    <div *ngFor="let form of extendsForms.controls; let i=index">
+      <div [formGroupName]="i">
+        <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+        <input type="text" formControlName="value">
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </div>
+
+</form>

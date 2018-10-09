@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  mysql_db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=form_dynamic
+      - MYSQL_USER=form_dynamic
+      - MYSQL_PASSWORD=form_dynamic
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+volumes:
+  mysql_data:
