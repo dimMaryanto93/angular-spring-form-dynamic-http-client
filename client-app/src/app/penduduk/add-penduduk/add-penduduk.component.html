@@ -1,7 +1,21 @@
 <form [formGroup]="formGroup" (submit)="submited($event)">
   <div>
-    <label for="input">Example input</label>
-    <input type="text" name="input" id="input">
+    <label for="nik">Nomor Induk Penduduk</label>
+    <input type="text" name="input" id="nik" formControlName="nik">
+  </div>
+  <div>
+    <label for="namaLengkap">Nama Lengkap</label>
+    <input type="text" name="input" id="namaLengkap" formControlName="namaLengkap">
+  </div>
+  <div>
+    <label for="jkL">
+      <input type="radio" name="jenisKelamin" id="jkL" value="Laki-Laki" formControlName="jenisKelamin">
+      Laki - Laki
+    </label>
+    <label for="jkP">
+      <input type="radio" name="jenisKelamin" id="jkP" value="Perempuan" formControlName="jenisKelamin">
+      Perempuan
+    </label>
   </div>
 
   <div formArrayName="extended">
@@ -37,7 +51,7 @@
 
   <div>
     <button type="submit">Submit</button>
-    <button type="reset">Reset</button>
+    <a href="#" routerLink="/">Kembali</a>
   </div>
 
 </form>

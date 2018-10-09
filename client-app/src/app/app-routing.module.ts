@@ -7,6 +7,7 @@ import {NgModule} from '@angular/core';
 import {DefaultLayoutComponent} from './default-layout/default-layout.component';
 
 const appRoutes: Routes = [
+  {path: '', redirectTo: '/form', pathMatch: 'full'},
   {
     path: 'form',
     component: DefaultLayoutComponent,

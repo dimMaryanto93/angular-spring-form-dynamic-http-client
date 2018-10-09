@@ -22,13 +22,14 @@ export class AddPendudukComponent implements OnInit {
   ngOnInit() {
     this.formGroups = new FormArray([]);
     this._pendudukService.getField().subscribe(data => {
-      this.fields = data;
+      this.fields = data.extended;
       console.log(`size of fields is ${this.fields.length}`);
       for (let field of this.fields) {
         const formGroup = this._formBuilder.group(
           {
             'columnName': this._formBuilder.control(field.columnName),
             'dataType': this._formBuilder.control(field.dataType),
+            'masterId': this._formBuilder.control(field.masterId),
             'value': this._formBuilder.control(''),
           }
         );
@@ -37,7 +38,12 @@ export class AddPendudukComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-    this.formGroup = new FormGroup({'extended': this.formGroups});
+    this.formGroup = new FormGroup({
+      'nik': this._formBuilder.control(''),
+      'namaLengkap': this._formBuilder.control(''),
+      'jenisKelamin': this._formBuilder.control(''),
+      'extended': this.formGroups
+    });
     console.log(this.formGroup);
   }
 
@@ -46,8 +52,8 @@ export class AddPendudukComponent implements OnInit {
   }
 
   submited($event) {
-    console.log(this.extendsForms.value);
-    this._pendudukService.setField(this.extendsForms.value).subscribe(data => {
+    console.log(this.formGroup.value);
+    this._pendudukService.setField(this.formGroup.value).subscribe(data => {
       console.log(data);
     }, error => console.log(error));
   }

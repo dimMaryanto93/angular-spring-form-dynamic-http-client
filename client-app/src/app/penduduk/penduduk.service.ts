@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Field} from '../field';
+import {PendudukDTO} from './penduduk.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class PendudukService {
   }
 
   getField() {
-    return this._http.get<Field[]>(`${environment.baseApi}/penduduk/fields`);
+    return this._http.get<PendudukDTO>(`${environment.baseApi}/penduduk/fields`);
   }
 
   setField(data: any) {

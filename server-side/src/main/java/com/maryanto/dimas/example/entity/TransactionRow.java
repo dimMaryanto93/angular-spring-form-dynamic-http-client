@@ -7,24 +7,23 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  * create table transaction_tables (
- *   id                  varchar(64) not null primary key,
- *   name_table          varchar(50) not null,
- *   name_column         varchar(25) not null,
- *   row_number          long      not null,
- *   data_type           varchar(10) not null,
- *   data_value_int      integer,
- *   data_value_money    decimal,
- *   data_value_boolean  boolean,
- *   data_value_string   varchar(255),
- *   data_value_text     text,
- *   data_value_date     date,
- *   data_value_datetime datetime
+ * id                  varchar(64) not null primary key,
+ * name_table          varchar(50) not null,
+ * name_column         varchar(25) not null,
+ * row_number          long      not null,
+ * data_type           varchar(10) not null,
+ * data_value_int      integer,
+ * data_value_money    decimal,
+ * data_value_boolean  boolean,
+ * data_value_string   varchar(255),
+ * data_value_text     text,
+ * data_value_date     date,
+ * data_value_datetime datetime
  * ) engine = InnoDB;
  */
 @Entity
@@ -45,9 +44,11 @@ public class TransactionRow {
     private String columnName;
     @Column(name = "row_number", nullable = false)
     private Long row;
-    @Column(name = "data_type",nullable = false, length = 10)
+    @Column(name = "data_type", nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
     private DataType dataType;
+    @Column(name = "master_id", length = 64)
+    private String masterId;
     @Column(name = "data_value_int")
     private Integer intValue;
     @Column(name = "data_value_boolean")

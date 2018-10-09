@@ -22,7 +22,7 @@ export class UpdatePendudukComponent implements OnInit {
   ngOnInit() {
     this.formGroups = new FormArray([]);
     this._pendudukService.getField().subscribe(data => {
-      this.fields = data;
+      this.fields = data.extended;
       console.log(`size of fields is ${this.fields.length}`);
       for (let field of this.fields) {
         const formGroup = this._formBuilder.group(

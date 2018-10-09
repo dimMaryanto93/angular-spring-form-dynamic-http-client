@@ -81,6 +81,7 @@ public class TableService {
         for (TransactionRow row : rows) {
             Map<String, Object> obj = new HashMap<>();
             obj.put("id", row.getId());
+            obj.put("masterId", row.getMasterId());
             obj.put("dataType", row.getDataType());
             obj.put("columnName", row.getColumnName());
             switch (row.getDataType()) {

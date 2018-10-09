@@ -8,13 +8,11 @@ import com.maryanto.dimas.example.repository.TableRowRepository;
 import com.maryanto.dimas.example.repository.TransactionRowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Transactional(readOnly = true)
 public class TableDao {
 
     @Autowired
@@ -30,13 +28,13 @@ public class TableDao {
         return rowRepository.findByTableName(tableName);
     }
 
-    @Transactional
-    public List<TransactionRow> save(String tableName, List<TransactionRow> rows) {
+    public List<TransactionRow> save(String tableName, String primaryId, List<TransactionRow> rows) {
         List<TransactionRow> datas = new ArrayList<>();
         sequanceRepository.incrementByTableName(tableName);
         SequanceGenerator generator = sequanceRepository.findByTableName(tableName);
 
         for (TransactionRow row : rows) {
+            row.setMasterId(primaryId);
             row.setTableName(generator.getTableName());
             row.setRow(generator.getCurrentValue());
             datas.add(transactionRepository.save(row));
@@ -45,7 +43,6 @@ public class TableDao {
         return datas;
     }
 
-    @Transactional
     public List<TransactionRow> update(String tableName, List<TransactionRow> rows) {
         List<TransactionRow> datas = new ArrayList<>();
         SequanceGenerator generator = sequanceRepository.findByTableName(tableName);

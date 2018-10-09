@@ -2,8 +2,8 @@ export interface Field {
   id: string;
   columnName: string;
   labelName: string;
+  masterId: any;
   dataType: DataType;
-
 }
 
 export enum DataType {

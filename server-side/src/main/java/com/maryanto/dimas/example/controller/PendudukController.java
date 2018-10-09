@@ -1,14 +1,14 @@
 package com.maryanto.dimas.example.controller;
 
+import com.maryanto.dimas.example.dto.PendudukDTO;
 import com.maryanto.dimas.example.service.PendudukService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
@@ -22,15 +22,15 @@ public class PendudukController {
     private PendudukService servicePenduduk;
 
     @GetMapping("/fields")
-    public List<Map<String, Object>> getFields() {
+    public PendudukDTO getFields() {
         return servicePenduduk.getFields();
     }
 
     @PostMapping("/fields")
-    public ResponseEntity<?> setFields(@RequestBody List<Map<String, Object>> params) {
+    public ResponseEntity<?> setFields(@Valid @RequestBody PendudukDTO dto) {
         try {
-            List<Map<String, Object>> dataPenduduk = servicePenduduk.save(params);
-            return ok().body(dataPenduduk);
+            PendudukDTO penduduk = servicePenduduk.save(dto);
+            return ok().body(penduduk);
         } catch (ParseException error) {
             log.warn("format tanggal salah", error);
             return badRequest().body("format tanggal salah");
