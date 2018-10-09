@@ -7,8 +7,30 @@
   <div formArrayName="extended">
     <div *ngFor="let form of extendsForms.controls; let i=index">
       <div [formGroupName]="i">
-        <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
-        <input type="text" formControlName="value">
+        <div *ngIf="'STRING' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <input type="text" formControlName="value">
+        </div>
+        <div *ngIf="'INT' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <input type="number" formControlName="value">
+        </div>
+        <div *ngIf="'BOOLEAN' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <input type="checkbox" formControlName="value">
+        </div>
+        <div *ngIf="'TEXT' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <textarea formControlName="value"></textarea>
+        </div>
+        <div *ngIf="'DATE' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <input type="text" formControlName="value">
+        </div>
+        <div *ngIf="'DATE_TIME' == fields[i].dataType">
+          <label [for]="fields[i].columnName">{{fields[i].labelName}}</label>
+          <input type="text" formControlName="value">
+        </div>
       </div>
     </div>
   </div>

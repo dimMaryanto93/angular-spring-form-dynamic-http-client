@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {PendudukService} from '../penduduk.service';
-import {Field} from '../../field';
+import {DataType, Field} from '../../field';
 
 @Component({
   selector: 'app-add-penduduk',
@@ -13,6 +13,7 @@ export class AddPendudukComponent implements OnInit {
   formGroup: FormGroup;
   formGroups: FormArray;
   fields: Field[] = [];
+  dataType = DataType;
 
   constructor(
     private _pendudukService: PendudukService,
@@ -25,7 +26,7 @@ export class AddPendudukComponent implements OnInit {
       this.fields = data;
       console.log(`size of fields is ${this.fields.length}`);
       for (let field of this.fields) {
-        let formGroup = this._formBuilder.group(
+        const formGroup = this._formBuilder.group(
           {
             'columnName': this._formBuilder.control(field.columnName),
             'dataType': this._formBuilder.control(field.dataType),
@@ -47,5 +48,8 @@ export class AddPendudukComponent implements OnInit {
 
   submited($event) {
     console.log(this.extendsForms.value);
+    this._pendudukService.setField(this.extendsForms.value).subscribe(data => {
+      console.log(data);
+    }, error => console.log(error));
   }
 }

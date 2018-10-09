@@ -15,4 +15,8 @@ export class PendudukService {
     return this._http.get<Field[]>(`${environment.baseApi}/penduduk/fields`);
   }
 
+  setField(data: any) {
+    return this._http.post(`${environment.baseApi}/penduduk/fields`, data);
+  }
+
 }
