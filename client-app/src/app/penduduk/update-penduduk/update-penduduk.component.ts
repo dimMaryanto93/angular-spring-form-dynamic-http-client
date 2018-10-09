@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {PendudukService} from '../penduduk.service';
 import {Field} from '../../field';
+import {PendudukService} from '../penduduk.service';
 
 @Component({
-  selector: 'app-add-penduduk',
-  templateUrl: './add-penduduk.component.html',
-  styleUrls: ['./add-penduduk.component.css']
+  selector: 'app-update-penduduk',
+  templateUrl: './update-penduduk.component.html',
+  styleUrls: ['./update-penduduk.component.css']
 })
-export class AddPendudukComponent implements OnInit {
+export class UpdatePendudukComponent implements OnInit {
 
   formGroup: FormGroup;
   formGroups: FormArray;
@@ -27,6 +27,7 @@ export class AddPendudukComponent implements OnInit {
       for (let field of this.fields) {
         const formGroup = this._formBuilder.group(
           {
+            'id': this._formBuilder.control(field.id),
             'columnName': this._formBuilder.control(field.columnName),
             'dataType': this._formBuilder.control(field.dataType),
             'value': this._formBuilder.control(''),
@@ -51,4 +52,5 @@ export class AddPendudukComponent implements OnInit {
       console.log(data);
     }, error => console.log(error));
   }
+
 }

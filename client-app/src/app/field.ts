@@ -1,4 +1,5 @@
 export interface Field {
+  id: string;
   columnName: string;
   labelName: string;
   dataType: DataType;
