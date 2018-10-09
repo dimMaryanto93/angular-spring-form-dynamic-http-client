@@ -24,8 +24,9 @@ public class PendudukService {
         return service.jsonWrapper(penduduk);
     }
 
-    public List<TransactionRow> setFields(List<Map<String, Object>> params)
+    public List<TransactionRow> save(List<Map<String, Object>> params)
             throws ParseException, NumberFormatException {
-        return service.jsonUnwrapper("contohTabel", params);
+        List<TransactionRow> penduduk = service.jsonUnwrapper(params);
+        return tableDao.save("penduduk", penduduk);
     }
 }

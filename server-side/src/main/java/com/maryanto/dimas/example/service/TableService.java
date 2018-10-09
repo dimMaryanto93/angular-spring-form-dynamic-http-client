@@ -30,14 +30,13 @@ public class TableService {
      * @throws ParseException
      * @throws NumberFormatException
      */
-    public List<TransactionRow> jsonUnwrapper(String tableName, List<Map<String, Object>> params) throws
+    public List<TransactionRow> jsonUnwrapper(List<Map<String, Object>> params) throws
             ParseException, NumberFormatException {
         List<TransactionRow> json = new ArrayList<>();
         for (Map<String, Object> param : params) {
             String column = param.get("columnName").toString();
             DataType type = DataType.valueOf(param.get("dataType").toString());
             TransactionRow row = new TransactionRow();
-            row.setTableName(tableName);
             row.setColumnName(column);
             row.setDataType(type);
             boolean value = StringUtils.isNotEmpty(param.get("value").toString());
