@@ -21,12 +21,12 @@ public class PendudukService {
 
     public List<Map<String, Object>> getFields() {
         List<TableRow> penduduk = tableDao.findColumnsByTableName("penduduk");
-        return service.jsonWrapper(penduduk);
+        return service.rowJsonWrapper(penduduk);
     }
 
-    public List<TransactionRow> save(List<Map<String, Object>> params)
+    public List<Map<String, Object>> save(List<Map<String, Object>> params)
             throws ParseException, NumberFormatException {
         List<TransactionRow> penduduk = service.jsonUnwrapper(params);
-        return tableDao.save("penduduk", penduduk);
+        return service.jsonWrapper(tableDao.save("penduduk", penduduk));
     }
 }

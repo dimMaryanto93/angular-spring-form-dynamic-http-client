@@ -24,7 +24,6 @@ public class TableService {
     /**
      * date: value if format date not valid steel work but the result not persist
      *
-     * @param tableName
      * @param params
      * @return
      * @throws ParseException
@@ -77,10 +76,11 @@ public class TableService {
         return json;
     }
 
-    public List<Map<String, Object>> jsonWrapperWithValue(List<TransactionRow> rows) {
+    public List<Map<String, Object>> jsonWrapper(List<TransactionRow> rows) {
         List<Map<String, Object>> json = new ArrayList<>();
         for (TransactionRow row : rows) {
             Map<String, Object> obj = new HashMap<>();
+            obj.put("id", row.getId());
             obj.put("dataType", row.getDataType());
             obj.put("columnName", row.getColumnName());
             switch (row.getDataType()) {
@@ -88,10 +88,10 @@ public class TableService {
                     obj.put("value", row.getIntValue());
                     break;
                 case DATE:
-                    obj.put("value", row.getDateValue());
+                    obj.put("value", row.getDateValue().getTime());
                     break;
                 case DATE_TIME:
-                    obj.put("value", row.getDatetimeValue());
+                    obj.put("value", row.getDatetimeValue().getTime());
                     break;
                 case TEXT:
                     obj.put("value", row.getTextValue());
@@ -110,13 +110,15 @@ public class TableService {
         return json;
     }
 
-    public List<Map<String, Object>> jsonWrapper(List<TableRow> rows) {
+    public List<Map<String, Object>> rowJsonWrapper(List<TableRow> rows) {
         List<Map<String, Object>> json = new ArrayList<>();
         for (TableRow row : rows) {
             Map<String, Object> obj = new HashMap<>();
+            obj.put("id", "");
             obj.put("columnName", row.getColumnName());
             obj.put("dataType", row.getDataType());
             obj.put("labelName", row.getLabelName());
+            obj.put("value", "");
             json.add(obj);
         }
         return json;

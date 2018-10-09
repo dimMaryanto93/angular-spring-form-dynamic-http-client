@@ -1,6 +1,5 @@
 package com.maryanto.dimas.example.controller;
 
-import com.maryanto.dimas.example.entity.TransactionRow;
 import com.maryanto.dimas.example.service.PendudukService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.badRequest;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/penduduk")
@@ -30,7 +29,7 @@ public class PendudukController {
     @PostMapping("/fields")
     public ResponseEntity<?> setFields(@RequestBody List<Map<String, Object>> params) {
         try {
-            List<TransactionRow> dataPenduduk = servicePenduduk.save(params);
+            List<Map<String, Object>> dataPenduduk = servicePenduduk.save(params);
             return ok().body(dataPenduduk);
         } catch (ParseException error) {
             log.warn("format tanggal salah", error);

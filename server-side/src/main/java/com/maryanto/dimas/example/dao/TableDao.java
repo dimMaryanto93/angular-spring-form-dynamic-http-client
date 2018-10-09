@@ -44,4 +44,18 @@ public class TableDao {
 
         return datas;
     }
+
+    @Transactional
+    public List<TransactionRow> update(String tableName, List<TransactionRow> rows) {
+        List<TransactionRow> datas = new ArrayList<>();
+        SequanceGenerator generator = sequanceRepository.findByTableName(tableName);
+
+        for (TransactionRow row : rows) {
+            row.setTableName(generator.getTableName());
+            row.setRow(generator.getCurrentValue());
+            datas.add(transactionRepository.save(row));
+        }
+
+        return datas;
+    }
 }
