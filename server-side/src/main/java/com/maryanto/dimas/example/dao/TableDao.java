@@ -28,6 +28,10 @@ public class TableDao {
         return rowRepository.findByTableName(tableName);
     }
 
+    public List<TransactionRow> findColumnByTableNameAndMasterId(String tableName, String masterId){
+        return transactionRepository.findByTableNameAndMasterId(tableName, masterId);
+    }
+
     public List<TransactionRow> save(String tableName, String primaryId, List<TransactionRow> rows) {
         List<TransactionRow> datas = new ArrayList<>();
         sequanceRepository.incrementByTableName(tableName);
@@ -43,13 +47,14 @@ public class TableDao {
         return datas;
     }
 
-    public List<TransactionRow> update(String tableName, List<TransactionRow> rows) {
+    public List<TransactionRow> update(String tableName, String primaryId,List<TransactionRow> rows) {
         List<TransactionRow> datas = new ArrayList<>();
         SequanceGenerator generator = sequanceRepository.findByTableName(tableName);
 
         for (TransactionRow row : rows) {
             row.setTableName(generator.getTableName());
             row.setRow(generator.getCurrentValue());
+            row.setMasterId(primaryId);
             datas.add(transactionRepository.save(row));
         }
 

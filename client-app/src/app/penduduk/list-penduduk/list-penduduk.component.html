@@ -7,11 +7,18 @@
       <td>NO</td>
       <td>Nama Lengkap</td>
       <td>Jenis Kelamin</td>
-      <td>Masa Berlaku</td>
       <td>Action</td>
     </tr>
   </thead>
   <tbody>
-
+    <tr *ngFor="let data of datas; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{data.namaLengkap}}</td>
+      <td>{{data.jenisKelamin}}</td>
+      <td>
+        <a href="#" [routerLink]="['/form',data.id]">Edit</a>
+        <button>Hapus</button>
+      </td>
+    </tr>
   </tbody>
 </table>

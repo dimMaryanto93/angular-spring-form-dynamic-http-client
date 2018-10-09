@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Field} from '../../field';
 import {PendudukService} from '../penduduk.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-update-penduduk',
@@ -16,30 +17,44 @@ export class UpdatePendudukComponent implements OnInit {
 
   constructor(
     private _pendudukService: PendudukService,
-    private _formBuilder: FormBuilder) {
+    private _formBuilder: FormBuilder,
+    private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.formGroups = new FormArray([]);
-    this._pendudukService.getField().subscribe(data => {
-      this.fields = data.extended;
-      console.log(`size of fields is ${this.fields.length}`);
-      for (let field of this.fields) {
-        const formGroup = this._formBuilder.group(
-          {
-            'id': this._formBuilder.control(field.id),
-            'columnName': this._formBuilder.control(field.columnName),
-            'dataType': this._formBuilder.control(field.dataType),
-            'value': this._formBuilder.control(''),
-          }
-        );
-        this.formGroups.push(formGroup);
-      }
-    }, error => {
-      console.log(error);
+    this._activatedRoute.params.subscribe(params => {
+      const id = params['id'];
+      console.log(`id of pages: ${id}`);
+      this._pendudukService.getFields().subscribe(data => {
+        this.fields = data.extended;
+        console.log(`size of fields is ${this.fields.length}`);
+        for (let field of this.fields) {
+          const formGroup = this._formBuilder.group(
+            {
+              'id': this._formBuilder.control(''),
+              'columnName': this._formBuilder.control(field.columnName),
+              'dataType': this._formBuilder.control(field.dataType),
+              'masterId': this._formBuilder.control(''),
+              'value': this._formBuilder.control(''),
+            }
+          );
+          this.formGroups.push(formGroup);
+        }
+      }, error => {
+        console.log(error);
+      });
+
+      this.formGroup = new FormGroup({
+        'id': this._formBuilder.control(''),
+        'nik': this._formBuilder.control(''),
+        'namaLengkap': this._formBuilder.control(''),
+        'jenisKelamin': this._formBuilder.control(''),
+        'extended': this.formGroups
+      });
+
+
     });
-    this.formGroup = new FormGroup({'extended': this.formGroups});
-    console.log(this.formGroup);
   }
 
   get extendsForms() {
@@ -47,10 +62,9 @@ export class UpdatePendudukComponent implements OnInit {
   }
 
   submited($event) {
-    console.log(this.extendsForms.value);
-    this._pendudukService.setField(this.extendsForms.value).subscribe(data => {
+    console.log(this.formGroup.value);
+    this._pendudukService.save(this.formGroup.value).subscribe(data => {
       console.log(data);
     }, error => console.log(error));
   }
-
 }

@@ -2,7 +2,8 @@ import {Field} from '../field';
 
 export class PendudukDTO {
   id: string;
-  namaLenkap: string;
+  nik: string;
+  namaLengkap: string;
   jenisKelamin: string;
   extended: Field[] = [];
 }

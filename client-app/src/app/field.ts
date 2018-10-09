@@ -4,6 +4,7 @@ export interface Field {
   labelName: string;
   masterId: any;
   dataType: DataType;
+  value: any;
 }
 
 export enum DataType {

@@ -21,7 +21,7 @@ export class AddPendudukComponent implements OnInit {
 
   ngOnInit() {
     this.formGroups = new FormArray([]);
-    this._pendudukService.getField().subscribe(data => {
+    this._pendudukService.getFields().subscribe(data => {
       this.fields = data.extended;
       console.log(`size of fields is ${this.fields.length}`);
       for (let field of this.fields) {
@@ -53,7 +53,7 @@ export class AddPendudukComponent implements OnInit {
 
   submited($event) {
     console.log(this.formGroup.value);
-    this._pendudukService.setField(this.formGroup.value).subscribe(data => {
+    this._pendudukService.save(this.formGroup.value).subscribe(data => {
       console.log(data);
     }, error => console.log(error));
   }
