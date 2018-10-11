@@ -29,8 +29,8 @@ public class TableService {
      * @throws ParseException
      * @throws NumberFormatException
      */
-    public List<TransactionRow> jsonUnwrapper(List<Map<String, Object>> params) throws
-            ParseException, NumberFormatException {
+    public List<TransactionRow> jsonUnwrapper(List<Map<String, Object>> params)
+            throws ParseException, NumberFormatException {
         List<TransactionRow> json = new ArrayList<>();
         for (Map<String, Object> param : params) {
             String column = param.get("columnName").toString();

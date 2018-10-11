@@ -17,10 +17,8 @@ public class TableDao {
 
     @Autowired
     private TableRowRepository rowRepository;
-
     @Autowired
     private SequanceGeneratorRepository sequanceRepository;
-
     @Autowired
     private TransactionRowRepository transactionRepository;
 

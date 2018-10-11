@@ -16,7 +16,8 @@ export class PendudukService {
   }
 
   getFieldsById(id: string) {
-    return this._http.get<PendudukDTO>(`${environment.baseApi}/penduduk/${id}/findById`);
+    return this._http.get<PendudukDTO>(`${environment.baseApi}/penduduk/${id}/findById`,
+      {observe: 'response'});
   }
 
 

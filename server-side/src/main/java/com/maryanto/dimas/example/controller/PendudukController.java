@@ -1,7 +1,6 @@
 package com.maryanto.dimas.example.controller;
 
 import com.maryanto.dimas.example.dto.PendudukDTO;
-import com.maryanto.dimas.example.entity.Penduduk;
 import com.maryanto.dimas.example.service.PendudukService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.springframework.http.ResponseEntity.badRequest;
-import static org.springframework.http.ResponseEntity.notFound;
-import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @RequestMapping("/api/penduduk")
