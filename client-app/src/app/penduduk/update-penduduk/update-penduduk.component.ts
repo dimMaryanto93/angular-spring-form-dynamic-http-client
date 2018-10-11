@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {DataType, Field} from '../../field';
+import {Field} from '../../field';
 import {PendudukService} from '../penduduk.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PendudukDTO} from '../penduduk.dto';
@@ -18,7 +18,6 @@ export class UpdatePendudukComponent implements OnInit, AfterViewInit {
   formGroups: FormArray;
   dto: PendudukDTO;
   private fields: Field[];
-  dataType = DataType;
 
   constructor(
     private _pendudukService: PendudukService,
